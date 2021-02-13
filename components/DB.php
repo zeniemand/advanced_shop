@@ -14,17 +14,17 @@ class DB
         //dd($params['host']);
 
         $dsn = "mysql:host={$params['host']};dbname={$params['dbname']}";
-        $db = new PDO($dsn, $params['user'], $params['password']);
+        $db = new PDO($dsn, $params['user'], $params['password'], [PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8' COLLATE 'utf8_unicode_ci'"]);
 
-        $sql = "ALTER DATABASE `{$params['dbname']}` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-        $res = $db->query($sql);
-        while($row = $res->fetch()){
-            $sql = "ALTER TABLE {$params['dbname']}.`{$row[0]}` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
-            $db->query($sql);
-            $sql = "ALTER TABLE {$params['dbname']}.`{$row[0]}` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-            $db->query($sql);
-
-        }
+//        $sql = "ALTER DATABASE `{$params['dbname']}` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+//        $res = $db->query($sql);
+//        while($row = $res->fetch()){
+//            $sql = "ALTER TABLE {$params['dbname']}.`{$row[0]}` CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci";
+//            $db->query($sql);
+//            $sql = "ALTER TABLE {$params['dbname']}.`{$row[0]}` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+//            $db->query($sql);
+//
+//        }
 
         return $db;
     }
